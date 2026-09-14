@@ -60,7 +60,7 @@ reader.readAsDataURL(selectedFile);
 
       setResultUrl(URL.createObjectURL(resultBlob));
       setProgress(100);
-    } } catch (err) {
+    } catch (err) {
   console.error(err);
   setError(`Gagal: ${err?.message || err}`);
   }
