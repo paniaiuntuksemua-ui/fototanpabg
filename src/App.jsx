@@ -44,31 +44,35 @@ reader.readAsDataURL(selectedFile);
   };
 
   const processImage = async () => {
-    if (!file) return;
-    setProcessing(true);
-    setError("");
-    setProgress(0);
-    setResultUrl("");
+  if (!file) return;
 
-    try {
-      const resultBlob = await removeBackground(file, {
-        output: { format: "image/png", quality: 1 },
-        progress: (_key, current, total) => {
-          if (total > 0) setProgress(Math.round((current / total) * 100));
+  setProcessing(true);
+  setError("");
+  setProgress(0);
+  setResultUrl("");
+
+  try {
+    const resultBlob = await removeBackground(file, {
+      output: {
+        format: "image/png",
+        quality: 1
+      },
+      progress: (_key, current, total) => {
+        if (total > 0) {
+          setProgress(Math.round((current / total) * 100));
         }
-      });
+      }
+    });
 
-      setResultUrl(URL.createObjectURL(resultBlob));
-      setProgress(100);
-    } catch (err) {
-  console.error(err);
-  setError(`Gagal: ${err?.message || err}`);
+    setResultUrl(URL.createObjectURL(resultBlob));
+    setProgress(100);
+  } catch (err) {
+    console.error(err);
+    setError(`Gagal: ${err?.message || err}`);
+  } finally {
+    setProcessing(false);
   }
-    } finally {
-      setProcessing(false);
-    }
-  };
-
+};
   const downloadImage = () => {
     if (!resultUrl) return;
     const link = document.createElement("a");
