@@ -60,9 +60,10 @@ reader.readAsDataURL(selectedFile);
 
       setResultUrl(URL.createObjectURL(resultBlob));
       setProgress(100);
-    } catch (err) {
-      console.error(err);
-      setError("Foto gagal diproses. Silakan coba foto lain.");
+    } } catch (err) {
+  console.error(err);
+  setError(`Gagal: ${err?.message || err}`);
+  }
     } finally {
       setProcessing(false);
     }
