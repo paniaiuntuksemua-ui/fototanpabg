@@ -35,7 +35,7 @@ function App() {
     const reader = new FileReader();
 reader.onload = () => setOriginalUrl(reader.result);
 reader.readAsDataURL(selectedFile);
-
+  };
   const handleInputChange = (event) => handleFile(event.target.files?.[0]);
 
   const handleDrop = (event) => {
