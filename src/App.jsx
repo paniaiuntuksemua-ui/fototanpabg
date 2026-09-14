@@ -32,8 +32,9 @@ function App() {
     }
 
     setFile(selectedFile);
-    setOriginalUrl(URL.createObjectURL(selectedFile));
-  };
+    const reader = new FileReader();
+reader.onload = () => setOriginalUrl(reader.result);
+reader.readAsDataURL(selectedFile);
 
   const handleInputChange = (event) => handleFile(event.target.files?.[0]);
 
